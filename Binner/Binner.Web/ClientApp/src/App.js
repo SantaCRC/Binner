@@ -21,6 +21,7 @@ import "./custom.css";
 import ErrorModal from "./components/ErrorModal";
 import { ErrorContext } from "./common/ErrorContext";
 
+
 export default class App extends Component {
   static displayName = App.name;
   history = createHistory(this.props);

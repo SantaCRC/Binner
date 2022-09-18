@@ -3,12 +3,14 @@ import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLi
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Form, Input } from "semantic-ui-react";
 import "./NavMenu.css";
+import { useTranslation } from "react-i18next";
 
 export function NavMenu(props) {
   const [collapsed, setCollapsed] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation();
 
   const toggleNavbar = () => {
     setCollapsed(!collapsed);
@@ -35,9 +37,7 @@ export function NavMenu(props) {
     <header>
       <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
         <Container className={"binner-container"}>
-          <NavbarBrand tag={Link} to="/">
-            Binner
-          </NavbarBrand>
+          <NavbarBrand tag={Link} to="/">{t("app_name")}</NavbarBrand>
           <NavbarToggler onClick={toggleNavbar} className="mr-2" />
           <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!collapsed} navbar>
             <Form onSubmit={onSubmit}>
@@ -46,7 +46,7 @@ export function NavMenu(props) {
                   <Input
                     icon={{ name: "search", circular: true, link: true, onClick: onSubmit }}
                     size="mini"
-                    placeholder="Search"
+                    placeholder={t("search")}
                     onChange={handleChange}
                     value={searchKeyword}
                     name="searchKeyword"
@@ -54,17 +54,17 @@ export function NavMenu(props) {
                 </NavItem>
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/">
-                    Home
+                    {t("home")}
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/inventory/add">
-                    Add Inventory
+                    {t("add_inventory")}
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/import">
-                    Order Import
+                    {t("order_import")}
                   </NavLink>
                 </NavItem>
               </ul>

@@ -7,6 +7,7 @@ import AwesomeDebouncePromise from 'awesome-debounce-promise';
 import { Icon, Input, Label, Button, TextArea, Image, Form, Table, Segment, Popup, Modal, Dimmer, Loader, Header, Confirm } from 'semantic-ui-react';
 import NumberPicker from '../components/NumberPicker';
 import { ProjectColors } from '../common/Types';
+import { Translation } from 'react-i18next';
 
 class Inventory extends Component {
   static displayName = Inventory.name;
@@ -51,7 +52,7 @@ class Inventory extends Component {
       partModalOpen: false,
       duplicatePartModalOpen: false,
       confirmDeleteIsOpen: false,
-      confirmPartDeleteContent: 'Are you sure you want to delete this part?',
+      confirmPartDeleteContent: <Translation>{t => <label>{t('delete_part_confirm')}</label>}</Translation>,
       part: {
         partId: 0,
         partNumber,
@@ -91,12 +92,12 @@ class Inventory extends Component {
         {
           key: 1,
           value: 1,
-          text: 'Through Hole',
+          text: <Translation>{t => <label>{t('throgh_hole')}</label>}</Translation>,
         },
         {
           key: 2,
           value: 2,
-          text: 'Surface Mount',
+          text: <Translation>{t => <label>{t('surface_mount')}</label>}</Translation>,
         },
       ],
       loadingPartMetadata: false,
@@ -586,7 +587,13 @@ class Inventory extends Component {
       <Table compact celled selectable size='small' className='partstable'>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Part</Table.HeaderCell>
+            <Table.HeaderCell>
+            <Translation>
+            {
+            t => <h1>{t('part')}</h1>
+            }
+            </Translation>
+            </Table.HeaderCell>
             <Table.HeaderCell>Manufacturer</Table.HeaderCell>
             <Table.HeaderCell>Part Type</Table.HeaderCell>
             <Table.HeaderCell>Supplier</Table.HeaderCell>
@@ -798,11 +805,17 @@ class Inventory extends Component {
         <Table compact celled striped size='small'>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Part</Table.HeaderCell>
-              <Table.HeaderCell width={2}>Quantity</Table.HeaderCell>
-              <Table.HeaderCell>Location</Table.HeaderCell>
-              <Table.HeaderCell>Bin Number</Table.HeaderCell>
-              <Table.HeaderCell>Bin Number 2</Table.HeaderCell>
+              <Table.HeaderCell>
+                <Translation>
+                {
+        t => <h1>{t('part')}</h1>
+      }
+                  </Translation>
+                </Table.HeaderCell>
+              <Table.HeaderCell width={2}><Translation>{t => <label>{t('quantity')}</label>}</Translation></Table.HeaderCell>
+              <Table.HeaderCell><Translation>{t => <label>{t('location')}</label>}</Translation></Table.HeaderCell>
+              <Table.HeaderCell><Translation>{t => <label>{t('bin_number')}</label>}</Translation></Table.HeaderCell>
+              <Table.HeaderCell><Translation>{t => <label>{t('bin_number')}</label>}</Translation> 2</Table.HeaderCell>
               <Table.HeaderCell width={1}></Table.HeaderCell>
             </Table.Row>
           </Table.Header>
@@ -810,7 +823,7 @@ class Inventory extends Component {
             {scannedParts.map((p, index) =>
               <Table.Row key={index} className={(highlightScannedPart && p.partNumber === highlightScannedPart.partNumber ? `scannedPartAnimation ${Math.random()}` : '')}>
                 <Table.Cell collapsing><Label>{p.partNumber}</Label></Table.Cell>
-                <Table.Cell collapsing><Form.Input width={10} value={p.quantity} onChange={(e, c) => this.handleScannedPartChange(e, c, p)} name='quantity' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} /></Table.Cell>
+                <Table.Cell collapsing><Form.Input width={10} value={p.quantity} onChange={(e, c) => this.handleScannedPartChange(e, c, p)} name=<Translation>{t => <label>{t('quantity')}</label>}</Translation> onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} /></Table.Cell>
                 <Table.Cell collapsing><Form.Input width={16} placeholder='Home lab' value={p.location} onChange={(e, c) => this.handleScannedPartChange(e, c, p)} name='location' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} onKeyDown={e => this.onScannedInputKeyDown(e, p)} /></Table.Cell>
                 <Table.Cell collapsing><Form.Input width={14} placeholder='' value={p.binNumber} onChange={(e, c) => this.handleScannedPartChange(e, c, p)} name='binNumber' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} onKeyDown={e => this.onScannedInputKeyDown(e, p)} /></Table.Cell>
                 <Table.Cell collapsing><Form.Input width={14} placeholder='' value={p.binNumber2} onChange={(e, c) => this.handleScannedPartChange(e, c, p)} name='binNumber2' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} onKeyDown={e => this.onScannedInputKeyDown(e, p)} /></Table.Cell>
@@ -828,13 +841,19 @@ class Inventory extends Component {
       <Table compact celled selectable striped>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Part</Table.HeaderCell>
-            <Table.HeaderCell>Quantity</Table.HeaderCell>
-            <Table.HeaderCell>Part Type</Table.HeaderCell>
-            <Table.HeaderCell>Manufacturer Part</Table.HeaderCell>
-            <Table.HeaderCell>Location</Table.HeaderCell>
-            <Table.HeaderCell>Bin Number</Table.HeaderCell>
-            <Table.HeaderCell>Bin Number 2</Table.HeaderCell>
+            <Table.HeaderCell>
+            <Translation>
+            {
+            t => <h3>{t('part')}</h3>
+            }
+            </Translation>
+            </Table.HeaderCell>
+            <Table.HeaderCell><Translation>{t => <label>{t('quantity')}</label>}</Translation></Table.HeaderCell>
+            <Table.HeaderCell><Translation>{t => <label>{t('part_type')}</label>}</Translation></Table.HeaderCell>
+            <Table.HeaderCell><Translation>{t => <label>{t('manufacture_part')}</label>}</Translation></Table.HeaderCell>
+            <Table.HeaderCell><Translation>{t => <label>{t('location')}</label>}</Translation></Table.HeaderCell>
+            <Table.HeaderCell><Translation>{t => <label>{t('bin_number')}</label>}</Translation></Table.HeaderCell>
+            <Table.HeaderCell><Translation>{t => <label>{t('bin_number')}</label>}</Translation> 2</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -864,23 +883,23 @@ class Inventory extends Component {
       loadingPartMetadata, loadingPartTypes, loadingProjects, loadingRecent, saveMessage, scannedParts, highlightScannedPart
     } = this.state;
     const matchingPartsList = this.renderAllMatchingParts(part, metadataParts);
-    const title = this.props.params.partNumber ? "Edit Inventory" : "Add Inventory";
+    const title = this.props.params.partNumber ? "Edit Inventory" : <Translation>{t => <h3>{t('add_inventory')}</h3>}</Translation>;
     return (
       <div>
         <Modal centered
           open={duplicatePartModalOpen}
           onClose={this.handleDuplicatePartModalClose}
         >
-          <Modal.Header>Duplicate Part</Modal.Header>
+          <Modal.Header><Translation>{t => <label>{t('dublicate_part')}</label>}</Translation></Modal.Header>
           <Modal.Content scrolling>
             <Modal.Description>
-              <h3>There is a possible duplicate part already in your inventory.</h3>
+            <Translation>{t => <h3>{t('dublicate_part')}</h3>}</Translation>
               {this.renderDuplicateParts()}
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>
-            <Button onClick={this.handleDuplicatePartModalClose}>Cancel</Button>
-            <Button primary onClick={this.handleForceSubmit}>Save Anyways</Button>
+            <Button onClick={this.handleDuplicatePartModalClose}><Translation>{t => <label>{t('cancel')}</label>}</Translation></Button>
+            <Button primary onClick={this.handleForceSubmit}><Translation>{t => <label>{t('save_anyways')}</label>}</Translation></Button>
           </Modal.Actions>
         </Modal>
         <Confirm open={this.state.confirmDeleteIsOpen} onCancel={this.confirmDeleteClose} onConfirm={this.handleDeletePart} content={this.state.confirmPartDeleteContent} />
@@ -888,7 +907,7 @@ class Inventory extends Component {
           {part.partId > 0 &&
             <Button animated='vertical' circular floated='right' size='mini' onClick={this.printLabel} style={{ marginTop: '5px'}}>
               <Button.Content visible><Icon name='print' /></Button.Content>
-              <Button.Content hidden>Print</Button.Content>
+              <Button.Content hidden><Translation>{t => <label>{t('print')}</label>}</Translation></Button.Content>
             </Button>
           }
           {part.partNumber && <Image src={'/part/preview?partNumber=' + part.partNumber} width={180} floated='right' style={{ marginTop: '0px' }} />}
@@ -918,34 +937,40 @@ class Inventory extends Component {
             </div>
           </div>
           <Form.Group>
-            <Form.Input label='Part' required placeholder='LM358' icon='search' focus value={part.partNumber || ''} onChange={this.handleChange} name='partNumber' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
-            <Form.Dropdown label='Part Type' placeholder='Part Type' loading={loadingPartTypes} search selection value={part.partTypeId || ''} options={partTypes} onChange={this.handleChange} name='partTypeId' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
-            <Form.Dropdown label='Mounting Type' placeholder='Mounting Type' search selection value={part.mountingTypeId || ''} options={mountingTypes} onChange={this.handleChange} name='mountingTypeId' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
-            <Form.Dropdown label='Project' placeholder='My Project' loading={loadingProjects} search selection value={part.projectId || ''} options={projects} onChange={this.handleChange} name='projectId' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
+            <Form.Input label=<Translation>{t => <label>{t('part')}</label>}</Translation> required placeholder='LM358' icon='search' focus value={part.partNumber || ''} onChange={this.handleChange} name='partNumber' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
+            <Form.Dropdown label=<Translation>{t => <label>{t('part_type')}</label>}</Translation> placeholder='Part Type' loading={loadingPartTypes} search selection value={part.partTypeId || ''} options={partTypes} onChange={this.handleChange} name='partTypeId' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
+            <Form.Dropdown label=<Translation>{t => <label>{t('mounting_type')}</label>}</Translation> placeholder='Mounting Type' search selection value={part.mountingTypeId || ''} options={mountingTypes} onChange={this.handleChange} name='mountingTypeId' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
+            <Form.Dropdown label=<Translation>{t => <label>{t('project')}</label>}</Translation> placeholder='My Project' loading={loadingProjects} search selection value={part.projectId || ''} options={projects} onChange={this.handleChange} name='projectId' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
           </Form.Group>
           <Form.Group>
-            <Popup hideOnScroll disabled={viewPreferences.helpDisabled} onOpen={this.disableHelp} content='Use the mousewheel and CTRL/ALT to change step size' trigger={<Form.Field control={NumberPicker} label='Quantity' placeholder='10' min={0} value={part.quantity || ''} onChange={this.updateNumberPicker} name='quantity' autoComplete='off' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />} />
-            <Popup hideOnScroll disabled={viewPreferences.helpDisabled} onOpen={this.disableHelp} content='A custom value for identifying the parts location' trigger={<Form.Input label='Location' placeholder='Home lab' value={part.location || ''} onChange={this.handleChange} name='location' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />} />
-            <Popup hideOnScroll disabled={viewPreferences.helpDisabled} onOpen={this.disableHelp} content='A custom value for identifying the parts location' trigger={<Form.Input label='Bin Number' placeholder='IC Components 2' value={part.binNumber || ''} onChange={this.handleChange} name='binNumber' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />} />
-            <Popup hideOnScroll disabled={viewPreferences.helpDisabled} onOpen={this.disableHelp} content='A custom value for identifying the parts location' trigger={<Form.Input label='Bin Number 2' placeholder='14' value={part.binNumber2 || ''} onChange={this.handleChange} name='binNumber2' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />} />
-            <Popup hideOnScroll disabled={viewPreferences.helpDisabled} onOpen={this.disableHelp} content='Alert when the quantity gets below this value' trigger={<Form.Input label='Low Stock' placeholder='10' value={part.lowStockThreshold || ''} onChange={this.handleChange} name='lowStockThreshold' width={3} onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />} />
+            <Popup hideOnScroll disabled={viewPreferences.helpDisabled} onOpen={this.disableHelp} content='Use the mousewheel and CTRL/ALT to change step size' trigger={<Form.Field control={NumberPicker} label=<Translation>{t => <label>{t('quantity')}</label>}</Translation> placeholder='10' min={0} value={part.quantity || ''} onChange={this.updateNumberPicker} name='quantity' autoComplete='off' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />} />
+            <Popup hideOnScroll disabled={viewPreferences.helpDisabled} onOpen={this.disableHelp} content='A custom value for identifying the parts location' trigger={<Form.Input label=<Translation>{t => <label>{t('location')}</label>}</Translation> placeholder='Home lab' value={part.location || ''} onChange={this.handleChange} name='location' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />} />
+            <Popup hideOnScroll disabled={viewPreferences.helpDisabled} onOpen={this.disableHelp} content='A custom value for identifying the parts location' trigger={<Form.Input label=<Translation>{t => <label>{t('bin_number')}</label>}</Translation> placeholder='IC Components 2' value={part.binNumber || ''} onChange={this.handleChange} name='binNumber' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />} />
+            <Popup hideOnScroll disabled={viewPreferences.helpDisabled} onOpen={this.disableHelp} content='A custom value for identifying the parts location' trigger={<Form.Input label=<Translation>{t => <label>{t('bin_number')} 2</label>}</Translation> placeholder='14' value={part.binNumber2 || ''} onChange={this.handleChange} name='binNumber2' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />} />
+            <Popup hideOnScroll disabled={viewPreferences.helpDisabled} onOpen={this.disableHelp} content='Alert when the quantity gets below this value' trigger={<Form.Input label=<Translation>{t => <label>{t('low_stock')}</label>}</Translation>placeholder='10' value={part.lowStockThreshold || ''} onChange={this.handleChange} name='lowStockThreshold' width={3} onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />} />
           </Form.Group>
           <Form.Field inline>
-            <Button type='submit' primary style={{ marginTop: '10px' }}><Icon name='save' />Save</Button>
+            <Button type='submit' primary style={{ marginTop: '10px' }}><Icon name='save' /><Translation>{t => <label>{t('save')}</label>}</Translation></Button>
             {part.partId > 0 &&
-              <Button type='button' title='Delete' onClick={e => this.confirmDeleteOpen(e, part)}><Icon name='delete' />Delete</Button>
+              <Button type='button' title=<Translation>{t => <label>{t('delete')}</label>}</Translation> onClick={e => this.confirmDeleteOpen(e, part)}><Icon name='delete' /><Translation>{t => <label>{t('delete')}</label>}</Translation></Button>
             }
             {saveMessage.length > 0 && <Label pointing='left'>{saveMessage}</Label>}
           </Form.Field>
           <Segment loading={loadingPartMetadata} color='blue'>
-            <Header dividing as='h3'>Part Metadata</Header>
+            <Header dividing as='h3'> 
+            <Translation>
+            {
+            t => <h3>{t('part_metadata')}</h3>
+            }
+            </Translation>
+            </Header>
             {metadataParts.length > 1 &&
               <Modal centered
-                trigger={<Button onClick={this.handleOpenModal}>Choose alternate part ({metadataParts.length})</Button>}
+                trigger={<Button onClick={this.handleOpenModal}><Translation>{t => <label>{t('choose_alternate_part')}</label>}</Translation> ({metadataParts.length})</Button>}
                 open={partModalOpen}
                 onClose={this.handlePartModalClose}
               >
-                <Modal.Header>Matching Parts</Modal.Header>
+                <Modal.Header><Translation>{t => <label>{t('matching_parts')}</label>}</Translation></Modal.Header>
                 <Modal.Content scrolling>
                   <Modal.Description>
                     {matchingPartsList}
@@ -955,24 +980,24 @@ class Inventory extends Component {
             }
             <Form.Group>
               <Form.Field width={4}>
-                <label>Cost</label>
+                <label><Translation>{t => <label>{t('cost')}</label>}</Translation></label>
                 <Input label='$' placeholder='0.00' value={part.cost} type='text' onChange={this.handleChange} name='cost' onFocus={this.disableKeyboardListening} onBlur={this.formatField} />
               </Form.Field>
-              <Form.Input label='Manufacturer' placeholder='Texas Instruments' value={part.manufacturer || ''} onChange={this.handleChange} name='manufacturer' width={4} onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
-              <Form.Input label='Manufacturer Part' placeholder='LM358' value={part.manufacturerPartNumber || ''} onChange={this.handleChange} name='manufacturerPartNumber' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
+              <Form.Input label=<Translation>{t => <label>{t('manufacturer')}</label>}</Translation> placeholder='Texas Instruments' value={part.manufacturer || ''} onChange={this.handleChange} name='manufacturer' width={4} onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
+              <Form.Input label=<Translation>{t => <label>{t('manufacture_part')}</label>}</Translation> placeholder='LM358' value={part.manufacturerPartNumber || ''} onChange={this.handleChange} name='manufacturerPartNumber' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
               <Image src={part.imageUrl} size='tiny' />
             </Form.Group>
             <Form.Field width={10}>
-              <label>Keywords</label>
-              <Input icon='tags' iconPosition='left' label={{ tag: true, content: 'Add Keyword' }} labelPosition='right' placeholder='op amp' onChange={this.handleChange} value={part.keywords || ''} name='keywords' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
+              <label><Translation>{t => <label>{t('keywords')}</label>}</Translation></label>
+              <Input icon='tags' iconPosition='left' label={{ tag: true, content: <Translation>{t => <label>{t('add_keyword')}</label>}</Translation> }} labelPosition='right' placeholder='op amp' onChange={this.handleChange} value={part.keywords || ''} name='keywords' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
             </Form.Field>
             <Form.Field width={4}>
-              <label>Package Type</label>
+              <label><Translation>{t => <label>{t('package_type')}</label>}</Translation></label>
               <Input placeholder='DIP8' value={part.packageType || ''} onChange={this.handleChange} name='packageType' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
             </Form.Field>
-            <Form.Field width={10} control={TextArea} label='Description' value={part.description || ''} onChange={this.handleChange} name='description' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
+            <Form.Field width={10} control={TextArea} label=<Translation>{t => <label>{t('description')}</label>}</Translation> value={part.description || ''} onChange={this.handleChange} name='description' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
             <Form.Field width={10}>
-              <label>Datasheet Url</label>
+              <label><Translation>{t => <label>{t('datasheet_url')}</label>}</Translation></label>
               <Input action className='labeled' placeholder='www.ti.com/lit/ds/symlink/lm2904-n.pdf' value={(part.datasheetUrl || '').replace('http://', '').replace('https://', '')} onChange={this.handleChange} name='datasheetUrl'>
                 <Label>http://</Label>
                 <input onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
@@ -980,7 +1005,7 @@ class Inventory extends Component {
               </Input>
             </Form.Field>
             <Form.Field width={10}>
-              <label>Product Url</label>
+              <label><Translation>{t => <label>{t('product_url')}</label>}</Translation></label>
               <Input action className='labeled' placeholder='' value={(part.productUrl || '').replace('http://', '').replace('https://', '')} onChange={this.handleChange} name='productUrl'>
                 <Label>http://</Label>
                 <input onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
@@ -988,11 +1013,11 @@ class Inventory extends Component {
               </Input>
             </Form.Field>
             <Form.Field width={4}>
-              <label>Lowest Cost Supplier</label>
+              <label><Translation>{t => <label>{t('low_cost_supplier')}</label>}</Translation></label>
               <Input placeholder='DigiKey' value={part.lowestCostSupplier || ''} onChange={this.handleChange} name='lowestCostSupplier' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
             </Form.Field>
             <Form.Field width={10}>
-              <label>Lowest Cost Supplier Url</label>
+              <label><Translation>{t => <label>{t('low_cost_supplier_url')}</label>}</Translation></label>
               <Input action className='labeled' placeholder='' value={(part.lowestCostSupplierUrl || '').replace('http://', '').replace('https://', '')} onChange={this.handleChange} name='lowestCostSupplierUrl'>
                 <Label>http://</Label>
                 <input onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
@@ -1000,11 +1025,11 @@ class Inventory extends Component {
               </Input>
             </Form.Field>
             <Form.Field width={4}>
-              <label>DigiKey Part Number</label>
+              <label><Translation>{t => <label>{t('digikey_part_number')}</label>}</Translation></label>
               <Input placeholder='296-1395-5-ND' value={part.digiKeyPartNumber || ''} onChange={this.handleChange} name='digiKeyPartNumber' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
             </Form.Field>
             <Form.Field width={4}>
-              <label>Mouser Part Number</label>
+              <label><Translation>{t => <label>{t('mouse_part_number')}</label>}</Translation></label>
               <Input placeholder='595-LM358AP' value={part.mouserPartNumber || ''} onChange={this.handleChange} name='mouserPartNumber' onFocus={this.disableKeyboardListening} onBlur={this.enableKeyboardListening} />
             </Form.Field>
           </Segment>
@@ -1012,7 +1037,7 @@ class Inventory extends Component {
             open={this.state.bulkScanIsOpen}
             onClose={this.handleBulkScanClose}
           >
-            <Modal.Header>Bulk Scan</Modal.Header>
+            <Modal.Header><Translation>{t => <label>{t('bulk_scan')}</label>}</Translation></Modal.Header>
             <Modal.Content>
               <div style={{ width: '200px', height: '100px', margin: 'auto' }}>
                 <div className='anim-box'>
@@ -1050,20 +1075,20 @@ class Inventory extends Component {
                 </div>
               </div>
               <div style={{ textAlign: 'center' }}>
-                Start scanning parts...
+              <Translation>{t => <label>{t('start_part_scan')}</label>}</Translation>
                 {this.renderScannedParts(scannedParts, highlightScannedPart)}
               </div>
             </Modal.Content>
             <Modal.Actions>
-              <Button onClick={() => this.setState({ bulkScanIsOpen: false })}>Cancel</Button>
-              <Button primary onClick={this.onSubmitScannedParts}>Save</Button>
+              <Button onClick={() => this.setState({ bulkScanIsOpen: false })}><Translation>{t => <label>{t('cancel')}</label>}</Translation></Button>
+              <Button primary onClick={this.onSubmitScannedParts}><Translation>{t => <label>{t('save')}</label>}</Translation></Button>
             </Modal.Actions>
           </Modal>
         </Form>
         <br />
         <div style={{ marginTop: '20px' }}>
           <Segment style={{ minHeight: '50px' }} color='teal'>
-            <Header dividing as='h3'>Recently Added</Header>
+            <Header dividing as='h3'><Translation>{t => <label>{t('recently_added')}</label>}</Translation></Header>
             <Dimmer active={loadingRecent} inverted>
               <Loader inverted />
             </Dimmer>
