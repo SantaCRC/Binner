@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import _ from 'underscore';
 import { Table, Visibility, Input, Label, Button, Segment, Form, TextArea, Icon } from 'semantic-ui-react';
 import { ProjectColors } from '../common/Types';
+import { Translation } from 'react-i18next';
 
 export class Projects extends Component {
   static displayName = Projects.name;
@@ -214,17 +215,17 @@ export class Projects extends Component {
       <Visibility onBottomVisible={this.handleNextPage} continuous>
         <Segment loading={loading}>
           <div style={{ minHeight: '35px' }}>
-            <Button onClick={this.handleShowAdd} icon size='mini' floated='right'><Icon name='file' /> Add Project</Button>
+            <Button onClick={this.handleShowAdd} icon size='mini' floated='right'><Icon name='file' /> <Translation>{t => <label>{t('add_project')}</label>}</Translation></Button>
           </div>
           <div>
             {addVisible &&
               <Segment>
                 <Form onSubmit={this.onSubmit}>
-                  <Form.Input width={6} label='Name' required placeholder='555 Timer Project' focus value={project.name} onChange={this.handleChange} name='name' />
-                  <Form.Field width={10} control={TextArea} label='Description' value={project.description} onChange={this.handleChange} name='description' />
-                  <Form.Input width={6} label='Location' required placeholder='New York' focus value={project.location} onChange={this.handleChange} name='location' />
-                  <Form.Dropdown width={4} label='Color' selection value={project.color} options={colors} onChange={this.handleChange} name='color' />
-                  <Button primary type='submit' icon><Icon name='save' /> Save</Button>
+                <Translation>{t => <Form.Input width={6} label={t('name')} required placeholder='555 Timer Project' focus value={project.name} onChange={this.handleChange} name='name' />}</Translation>
+                  <Translation>{t =><Form.Field width={10} control={TextArea} label={t('description')} value={project.description} onChange={this.handleChange} name='description' />}</Translation>
+                  <Translation>{t =><Form.Input width={6} label={t('location')} required placeholder='New York' focus value={project.location} onChange={this.handleChange} name='location' />}</Translation>
+                  <Translation>{t =><Form.Dropdown width={4} label={t('color')} selection value={project.color} options={colors} onChange={this.handleChange} name='color' />}</Translation>
+                  <Button primary type='submit' icon><Icon name='save' /> <Translation>{t => <label>{t('save')}</label>}</Translation></Button>
                 </Form>
               </Segment>
             }
@@ -233,10 +234,10 @@ export class Projects extends Component {
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell></Table.HeaderCell>
-                <Table.HeaderCell sorted={column === 'name' ? direction : null} onClick={this.handleSort('name')}>Project</Table.HeaderCell>
-                <Table.HeaderCell sorted={column === 'description' ? direction : null} onClick={this.handleSort('description')}>Description</Table.HeaderCell>
-                <Table.HeaderCell sorted={column === 'location' ? direction : null} onClick={this.handleSort('location')}>Location</Table.HeaderCell>
-                <Table.HeaderCell sorted={column === 'parts' ? direction : null} onClick={this.handleSort('parts')}>Parts</Table.HeaderCell>
+                <Table.HeaderCell sorted={column === 'name' ? direction : null} onClick={this.handleSort('name')}><Translation>{t => <label>{t('project')}</label>}</Translation></Table.HeaderCell>
+                <Table.HeaderCell sorted={column === 'description' ? direction : null} onClick={this.handleSort('description')}><Translation>{t => <label>{t('description')}</label>}</Translation></Table.HeaderCell>
+                <Table.HeaderCell sorted={column === 'location' ? direction : null} onClick={this.handleSort('location')}><Translation>{t => <label>{t('location')}</label>}</Translation></Table.HeaderCell>
+                <Table.HeaderCell sorted={column === 'parts' ? direction : null} onClick={this.handleSort('parts')}><Translation>{t => <label>{t('parts')}</label>}</Translation></Table.HeaderCell>
                 <Table.HeaderCell></Table.HeaderCell>
               </Table.Row>
             </Table.Header>
@@ -264,7 +265,7 @@ export class Projects extends Component {
 
     return (
       <div>
-        <h1>Projects</h1>
+        <h1><Translation>{t => <label>{t('projects')}</label>}</Translation></h1>
         <p>
           Projects allow you to associate Parts for a particular project.<br/>
           You will be able to generate part lists and reports by Project.

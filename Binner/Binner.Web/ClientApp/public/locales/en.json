@@ -55,6 +55,24 @@
     "start_part_scan": "Start scanning parts...",
     "recently_added": "Recently Added",
     "description": "Description",
-    "add_keyword": "Add Keyword"
+    "add_keyword": "Add Keyword",
+    "inventory": "Inventory",
+    "digikey_part": "Digikey Part",
+    "mouser_part": "Mouser Part",
+    "load_more_parts": "Load More Parts",
+    "no_additional_parts": "No additional parts",
+    "datasheet_search": "Datasheet Search",
+    "website": "Website",
+    "package": "Package",
+    "status": "Status",
+    "view_datasheet": "View Datasheet",
+    "low_inventory": "Low Inventory",
+    "low_inventory_description_1": "Use esta pagina para reordenar las partes que tienen bajo stock.",
+    "low_inventory_description_2": "Puede definir stock bajo en la configuración.",
+    "part_type_description": "Los tipos de partes le permiten organizar sus partes en categorías.",
+    "part_type_description_2": "Por ejemplo, puede crear un tipo de parte para resistencias, capacitores, etc",
+    "parent": "Parent",
+    "add_part_type": "Add Part Type",
+    "add_project": "Add Project"
 
 }

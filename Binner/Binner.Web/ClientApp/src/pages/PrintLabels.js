@@ -3,6 +3,7 @@ import _ from "underscore";
 import { Layout } from './Layout';
 import {ErrorContext} from '../common/ErrorContext';
 import { DEFAULT_FONT } from '../common/Types';
+import { Translation } from 'react-i18next';
 
 import { HandleBinaryResponse } from "../common/handleResponse.js";
 import { Button, Icon, Form, Input, Checkbox, Table, Image, Dropdown } from "semantic-ui-react";

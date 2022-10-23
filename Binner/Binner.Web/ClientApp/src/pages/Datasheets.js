@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import _ from 'underscore';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
 import { Table, Form, Segment } from 'semantic-ui-react';
+import { Translation } from 'react-i18next';
 
 export class Datasheets extends Component {
   static displayName = Datasheets.name;
@@ -37,12 +38,12 @@ export class Datasheets extends Component {
         {
           key: 1,
           value: 'through hole',
-          text: 'Through Hole',
+          text: <Translation>{t => <label>{t('through_hole')}</label>}</Translation>,
         },
         {
           key: 2,
           value: 'surface mount',
-          text: 'Surface Mount',
+          text: <Translation>{t => <label>{t('surface_mount')}</label>}</Translation>,
         },
       ],
     };
@@ -178,21 +179,21 @@ export class Datasheets extends Component {
       <div>
         <Form>
           <Form.Group>
-            <Form.Input label='Part' required placeholder='LM358' icon='search' focus value={part.partNumber} onChange={this.handleChange} name='partNumber' />
-            <Form.Dropdown label='Part Type' placeholder='Part Type' search selection value={part.partType} options={partTypes} onChange={this.handleChange} name='partType' />
-            <Form.Dropdown label='Mounting Type' placeholder='Mounting Type' search selection value={part.mountingType} options={mountingTypes} onChange={this.handleChange} name='mountingType' />
+            <Translation>{t => <Form.Input label={t('part')} required placeholder='LM358' icon='search' focus value={part.partNumber} onChange={this.handleChange} name='partNumber' />}</Translation>
+            <Translation>{t => <Form.Dropdown label={t('part_type')} placeholder={t('part_type')} search selection value={part.partType} options={partTypes} onChange={this.handleChange} name='partType' />}</Translation>
+            <Translation>{t => <Form.Dropdown label={t('mounting_type')} placeholder={t('mounting_type')} search selection value={part.mountingType} options={mountingTypes} onChange={this.handleChange} name='mountingType' />}</Translation>
           </Form.Group>
         </Form>
         <Segment loading={loading}>
           <Table compact celled sortable selectable striped size='small'>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell sorted={column === 'manufacturerPartNumber' ? direction : null} onClick={this.handleSort('manufacturerPartNumber')}>Part</Table.HeaderCell>
-                <Table.HeaderCell sorted={column === 'manufacturer' ? direction : null} onClick={this.handleSort('manufacturer')}>Manufacturer</Table.HeaderCell>
-                <Table.HeaderCell sorted={column === 'website' ? direction : null} onClick={this.handleSort('website')}>Website</Table.HeaderCell>
-                <Table.HeaderCell sorted={column === 'datasheetUrl' ? direction : null} onClick={this.handleSort('datasheetUrl')}>Datasheet</Table.HeaderCell>
-                <Table.HeaderCell sorted={column === 'package' ? direction : null} onClick={this.handleSort('package')}>Package</Table.HeaderCell>
-                <Table.HeaderCell sorted={column === 'status' ? direction : null} onClick={this.handleSort('status')}>Status</Table.HeaderCell>
+                <Table.HeaderCell sorted={column === 'manufacturerPartNumber' ? direction : null} onClick={this.handleSort('manufacturerPartNumber')}><Translation>{t => <label>{t('part')}</label>}</Translation></Table.HeaderCell>
+                <Table.HeaderCell sorted={column === 'manufacturer' ? direction : null} onClick={this.handleSort('manufacturer')}><Translation>{t => <label>{t('manufacturer')}</label>}</Translation></Table.HeaderCell>
+                <Table.HeaderCell sorted={column === 'website' ? direction : null} onClick={this.handleSort('website')}><Translation>{t => <label>{t('website')}</label>}</Translation></Table.HeaderCell>
+                <Table.HeaderCell sorted={column === 'datasheetUrl' ? direction : null} onClick={this.handleSort('datasheetUrl')}><Translation>{t => <label>{t('datasheet')}</label>}</Translation></Table.HeaderCell>
+                <Table.HeaderCell sorted={column === 'package' ? direction : null} onClick={this.handleSort('package')}><Translation>{t => <label>{t('package')}</label>}</Translation></Table.HeaderCell>
+                <Table.HeaderCell sorted={column === 'status' ? direction : null} onClick={this.handleSort('status')}><Translation>{t => <label>{t('status')}</label>}</Translation></Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -202,7 +203,7 @@ export class Datasheets extends Component {
                   <Table.Cell>{p.manufacturer}</Table.Cell>
                   <Table.Cell>{this.getHostnameFromRegex(_.first(p.datasheetUrls))}</Table.Cell>
                   <Table.Cell>{p.datasheetUrls.map((url, dindex) =>
-                    <a href={url} alt={url} key={dindex} onClick={e => this.handleHighlightAndVisit(e, url)}>View Datasheet</a>
+                    <a href={url} alt={url} key={dindex} onClick={e => this.handleHighlightAndVisit(e, url)}><Translation>{t => <label>{t('view_datasheet')}</label>}</Translation></a>
                   )}
                   </Table.Cell>
                   <Table.Cell>{p.packageType.replace(/\([^()]*\)/g, '')}</Table.Cell>
@@ -222,7 +223,7 @@ export class Datasheets extends Component {
 
     return (
       <div>
-        <h1>Datasheet Search</h1>
+        <h1><Translation>{t => <label>{t('datasheet_search')}</label>}</Translation></h1>
         {contents}
       </div>
     );

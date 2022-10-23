@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Segment, Statistic, Icon } from "semantic-ui-react";
+import { Translation } from "react-i18next";
 
 export function Tools(props) {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ export function Tools(props) {
 
   return (
     <div>
-      <h1>Tools</h1>
+      <h1><Translation>{t => <label>{t('tools')}</label>}</Translation></h1>
       <p>Binner includes a suite of free utilities common to daily life in electrical engineering.</p>
       <Segment>
         <Statistic.Group widths="three">

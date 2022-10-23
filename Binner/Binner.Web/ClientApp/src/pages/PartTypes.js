@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'underscore';
 import { Table, Input, Button, Segment, Form, Icon, Dropdown } from 'semantic-ui-react';
+import { Translation } from 'react-i18next';
 
 export class PartTypes extends Component {
   static displayName = PartTypes.name;
@@ -193,7 +194,7 @@ export class PartTypes extends Component {
     return (
       <Segment loading={loading}>
         <div style={{ minHeight: '35px' }}>
-          <Button onClick={this.handleShowAdd} icon size='mini' floated='right'><Icon name='file' /> Add Part Type</Button>
+          <Button onClick={this.handleShowAdd} icon size='mini' floated='right'><Icon name='file' /> <Translation>{t => <label>{t('add_part_type')}</label>}</Translation></Button>
         </div>
         <div>
           {addVisible &&
@@ -201,7 +202,7 @@ export class PartTypes extends Component {
               <Form onSubmit={this.onSubmit}>
               <Form.Input width={6} label='Name' required placeholder='Resistors' focus value={partType.name} onChange={this.handleChange} name='name' />
               <Form.Dropdown width={4} label='Parent' selection value={partType.parentPartTypeId} options={partTypeOptions} onChange={this.handleChange} name='color' />
-                <Button primary type='submit' icon><Icon name='save' /> Save</Button>
+                <Button primary type='submit' icon><Icon name='save' /> <Translation>{t => <label>{t('save')}</label>}</Translation></Button>
               </Form>
             </Segment>
           }
@@ -209,9 +210,9 @@ export class PartTypes extends Component {
         <Table compact celled sortable selectable striped size='small'>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell sorted={column === 'name' ? direction : null} onClick={this.handleSort('name')}>Part Type</Table.HeaderCell>
-              <Table.HeaderCell sorted={column === 'parentPartTypeId' ? direction : null} onClick={this.handleSort('location')}>Parent</Table.HeaderCell>
-              <Table.HeaderCell sorted={column === 'parts' ? direction : null} onClick={this.handleSort('parts')}>Parts</Table.HeaderCell>
+              <Table.HeaderCell sorted={column === 'name' ? direction : null} onClick={this.handleSort('name')}><Translation>{t => <label>{t('part_type')}</label>}</Translation></Table.HeaderCell>
+              <Table.HeaderCell sorted={column === 'parentPartTypeId' ? direction : null} onClick={this.handleSort('location')}><Translation>{t => <label>{t('parent')}</label>}</Translation></Table.HeaderCell>
+              <Table.HeaderCell sorted={column === 'parts' ? direction : null} onClick={this.handleSort('parts')}><Translation>{t => <label>{t('parts')}</label>}</Translation></Table.HeaderCell>
               <Table.HeaderCell></Table.HeaderCell>
             </Table.Row>
           </Table.Header>
@@ -236,10 +237,10 @@ export class PartTypes extends Component {
 
     return (
       <div>
-        <h1>Part Types</h1>
+        <h1><Translation>{t => <label>{t('part_types')}</label>}</Translation></h1>
         <p>
-          Part Types allow you to separate your parts by type. <i>Parent</i> types allow for unlimited part type hierarchy.<br/>
-          For example: OpAmps may be a sub-type of IC's, so OpAmp's parent type is IC.
+        <Translation>{t => <label>{t('part_type_description')}</label>}</Translation><br/>
+        <Translation>{t => <label>{t('part_type_description_2')}</label>}</Translation>
         </p>
         {contents}
       </div>

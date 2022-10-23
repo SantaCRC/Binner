@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import PartsGrid from "../components/PartsGrid";
+import { Translation } from 'react-i18next';
 
 class LowInventory extends Component {
   static displayName = LowInventory.name;
@@ -60,10 +61,11 @@ class LowInventory extends Component {
     
     return (
       <div>
-        <h1>Low Inventory</h1>
+        <h1><Translation>{t => <label>{t('low_inventory')}</label>}</Translation></h1>
         <p>
-          Use this page to reorder parts you are low on.<br/>
-          You can define a custom <i>Low Stock</i> value per part in your inventory.
+        <Translation>{t => <label>{t('low_inventory_description_1')}</label>}</Translation>
+        <br></br>
+        <Translation>{t => <label>{t('low_inventory_description_2')}</label>}</Translation>
         </p>
         <PartsGrid parts={parts} columns={columns} loadPage={this.handleNextPage} noRemainingData={this.state.noRemainingData} onPartClick={this.handlePartClick} name='partsGrid' />
       </div>

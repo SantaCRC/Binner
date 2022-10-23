@@ -92,7 +92,7 @@ class Inventory extends Component {
         {
           key: 1,
           value: 1,
-          text: <Translation>{t => <label>{t('throgh_hole')}</label>}</Translation>,
+          text: <Translation>{t => <label>{t('through_hole')}</label>}</Translation>,
         },
         {
           key: 2,

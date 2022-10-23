@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form } from 'semantic-ui-react';
+import { Translation } from 'react-i18next';
 
 export class ExportData extends Component {
   static displayName = ExportData.name;
@@ -52,15 +53,15 @@ export class ExportData extends Component {
     const { exportFormat, exportFormats, loading } = this.state;
     return (
       <div>
-        <h1>Data Export</h1>
+        <h1><Translation>{t => <label>{t('data_export')}</label>}</Translation></h1>
         <p>
           Export your Binner database to a human-readable format.
         </p>
         <Form onSubmit={this.onSubmit} loading={loading}>
           <Form.Group>
-            <Form.Dropdown label='Format' placeholder='Choose a format' selection value={exportFormat} options={exportFormats} onChange={this.handleChange} name='exportFormat' />
+            <Translation>{t =><Form.Dropdown label={t('format')} placeholder={t('choose_format')} selection value={exportFormat} options={exportFormats} onChange={this.handleChange} name='exportFormat' />}</Translation>
           </Form.Group>
-          <Button primary>Export</Button>
+          <Button primary><Translation>{t => <label>{t('export')}</label>}</Translation></Button>
         </Form>
       </div>
     );

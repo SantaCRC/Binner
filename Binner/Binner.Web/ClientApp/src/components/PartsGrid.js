@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import _ from 'underscore';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Translation } from 'react-i18next';
 
 const AppMedia = createMedia({
   breakpoints: {
@@ -237,18 +238,18 @@ export default class PartsGrid extends Component {
             <Table id="partsGrid" compact celled sortable selectable striped unstackable size='small'>
               <Table.Header>
                 <Table.Row>
-                  {columns.partnumber && <Table.HeaderCell sorted={column === 'partNumber' ? direction : null} onClick={this.handleSort('partNumber')}>Part</Table.HeaderCell>}
-                  {columns.quantity && <Table.HeaderCell sorted={column === 'quantity' ? direction : null} onClick={this.handleSort('quantity')}>Quantity</Table.HeaderCell>}
-                  {columns.lowstockthreshold && <Table.HeaderCell sorted={column === 'lowstockthreshold' ? direction : null} onClick={this.handleSort('lowstockthreshold')}>Low Stock</Table.HeaderCell>}
-                  {columns.manufacturerpartnumber && <Table.HeaderCell sorted={column === 'manufacturerPartNumber' ? direction : null} onClick={this.handleSort('manufacturerPartNumber')}>Manufacturer Part</Table.HeaderCell> }
-                  {columns.description && <Media greaterThan="tablet">{(className, renderChildren) => { return (<Table.HeaderCell className={className} sorted={column === 'description' ? direction : null} onClick={this.handleSort('description')}>{renderChildren ? "Description" : null}</Table.HeaderCell>)}}</Media>}              
-                  {columns.location && <Media greaterThan="tablet">{(className, renderChildren) => { return (<Table.HeaderCell className={className} sorted={column === 'location' ? direction : null} onClick={this.handleSort('location')}>{renderChildren ? "Location" : null}</Table.HeaderCell>)}}</Media> }
-                  {columns.binnumber && <Media greaterThan="tablet">{(className, renderChildren) => { return (<Table.HeaderCell className={className} sorted={column === 'binNumber' ? direction : null} onClick={this.handleSort('binNumber')}>{renderChildren ? "Bin Number" : null}</Table.HeaderCell>)}}</Media> }
-                  {columns.binnumber2 && <Media greaterThan="tablet">{(className, renderChildren) => { return (<Table.HeaderCell className={className} sorted={column === 'binNumber2' ? direction : null} onClick={this.handleSort('binNumber2')}>{renderChildren ? "Bin Number 2" : null}</Table.HeaderCell>)}}</Media> }
-                  {columns.cost && <Media greaterThan="computer">{(className, renderChildren) => { return (<Table.HeaderCell className={className} sorted={column === 'cost' ? direction : null} onClick={this.handleSort('cost')}>{renderChildren ? "Cost" : null}</Table.HeaderCell>)}}</Media> }
-                  {columns.digikeypartnumber && <Media greaterThan="computer">{(className, renderChildren) => { return (<Table.HeaderCell className={className} sorted={column === 'digiKeyPartNumber' ? direction : null} onClick={this.handleSort('digiKeyPartNumber')}>{renderChildren ? "DigiKey Part" : null}</Table.HeaderCell>)}}</Media> }
-                  {columns.mouserpartnumber && <Media greaterThan="computer">{(className, renderChildren) => { return (<Table.HeaderCell className={className} sorted={column === 'mouserPartNumber' ? direction : null} onClick={this.handleSort('mouserPartNumber')}>{renderChildren ? "Mouser Part" : null}</Table.HeaderCell>)}}</Media> }
-                  {columns.datasheeturl && <Media greaterThan="computer">{(className, renderChildren) => { return (<Table.HeaderCell className={className} sorted={column === 'datasheetUrl' ? direction : null} onClick={this.handleSort('datasheetUrl')}>{renderChildren ? "Datasheet" : null}</Table.HeaderCell>)}}</Media> }
+                  {columns.partnumber && <Table.HeaderCell sorted={column === 'partNumber' ? direction : null} onClick={this.handleSort('partNumber')}><Translation>{t => <label>{t('part')}</label>}</Translation></Table.HeaderCell>}
+                  {columns.quantity && <Table.HeaderCell sorted={column === 'quantity' ? direction : null} onClick={this.handleSort('quantity')}><Translation>{t => <label>{t('quantity')}</label>}</Translation></Table.HeaderCell>}
+                  {columns.lowstockthreshold && <Table.HeaderCell sorted={column === 'lowstockthreshold' ? direction : null} onClick={this.handleSort('lowstockthreshold')}><Translation>{t => <label>{t('low_stock')}</label>}</Translation></Table.HeaderCell>}
+                  {columns.manufacturerpartnumber && <Table.HeaderCell sorted={column === 'manufacturerPartNumber' ? direction : null} onClick={this.handleSort('manufacturerPartNumber')}><Translation>{t => <label>{t('manufacture_part')}</label>}</Translation></Table.HeaderCell> }
+                  {columns.description && <Media greaterThan="tablet">{(className, renderChildren) => { return (<Table.HeaderCell className={className} sorted={column === 'description' ? direction : null} onClick={this.handleSort('description')}>{renderChildren ? <Translation>{t => <label>{t('description')}</label>}</Translation> : null}</Table.HeaderCell>)}}</Media>}              
+                  {columns.location && <Media greaterThan="tablet">{(className, renderChildren) => { return (<Table.HeaderCell className={className} sorted={column === 'location' ? direction : null} onClick={this.handleSort('location')}>{renderChildren ? <Translation>{t => <label>{t('location')}</label>}</Translation> : null}</Table.HeaderCell>)}}</Media> }
+                  {columns.binnumber && <Media greaterThan="tablet">{(className, renderChildren) => { return (<Table.HeaderCell className={className} sorted={column === 'binNumber' ? direction : null} onClick={this.handleSort('binNumber')}>{renderChildren ? <Translation>{t => <label>{t('bin_number')}</label>}</Translation> : null}</Table.HeaderCell>)}}</Media> }
+                  {columns.binnumber2 && <Media greaterThan="tablet">{(className, renderChildren) => { return (<Table.HeaderCell className={className} sorted={column === 'binNumber2' ? direction : null} onClick={this.handleSort('binNumber2')}>{renderChildren ? <Translation>{t => <label>{t('bin_number')+" 2"}</label>}</Translation> : null}</Table.HeaderCell>)}}</Media> }
+                  {columns.cost && <Media greaterThan="computer">{(className, renderChildren) => { return (<Table.HeaderCell className={className} sorted={column === 'cost' ? direction : null} onClick={this.handleSort('cost')}>{renderChildren ? <Translation>{t => <label>{t('cost')}</label>}</Translation> : null}</Table.HeaderCell>)}}</Media> }
+                  {columns.digikeypartnumber && <Media greaterThan="computer">{(className, renderChildren) => { return (<Table.HeaderCell className={className} sorted={column === 'digiKeyPartNumber' ? direction : null} onClick={this.handleSort('digiKeyPartNumber')}>{renderChildren ? <Translation>{t => <label>{t('digikey_part')}</label>}</Translation> : null}</Table.HeaderCell>)}}</Media> }
+                  {columns.mouserpartnumber && <Media greaterThan="computer">{(className, renderChildren) => { return (<Table.HeaderCell className={className} sorted={column === 'mouserPartNumber' ? direction : null} onClick={this.handleSort('mouserPartNumber')}>{renderChildren ? <Translation>{t => <label>{t('mouser_part')}</label>}</Translation> : null}</Table.HeaderCell>)}}</Media> }
+                  {columns.datasheeturl && <Media greaterThan="computer">{(className, renderChildren) => { return (<Table.HeaderCell className={className} sorted={column === 'datasheetUrl' ? direction : null} onClick={this.handleSort('datasheetUrl')}>{renderChildren ? <Translation>{t => <label>{t('datasheet')}</label>}</Translation> : null}</Table.HeaderCell>)}}</Media> }
                   {columns.print && <Media greaterThan="tablet">{(className, renderChildren) => { return (<Table.HeaderCell className={className}></Table.HeaderCell>)}}</Media> }
                   {columns.delete && <Table.HeaderCell></Table.HeaderCell>}
                 </Table.Row>
@@ -300,8 +301,8 @@ export default class PartsGrid extends Component {
                 )}
               </Table.Body>
             </Table>
-            {!this.props.noRemainingData && <Button onClick={this.handleNextPage}>Load More Parts</Button>}
-            {this.props.noRemainingData && <Button disabled={true}>No Additional Parts</Button>}
+            {!this.props.noRemainingData && <Button onClick={this.handleNextPage}><Translation>{t => <label>{t('load_more_parts')}</label>}</Translation></Button>}
+            {this.props.noRemainingData && <Button disabled={true}><Translation>{t => <label>{t('no_additional_parts')}</label>}</Translation></Button>}
         </MediaContextProvider>
         <Confirm open={this.state.confirmDeleteIsOpen} onCancel={this.confirmDeleteClose} onConfirm={this.handleDeletePart} content={this.state.confirmPartDeleteContent} />
         <Modal open={this.state.modalIsOpen} onCancel={this.handleModalClose} onClose={this.handleModalClose}>

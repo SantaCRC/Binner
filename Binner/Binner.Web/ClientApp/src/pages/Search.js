@@ -5,6 +5,7 @@ import AwesomeDebouncePromise from 'awesome-debounce-promise';
 import { Input, Button, Icon } from 'semantic-ui-react';
 import { getQueryVariable } from '../common/query';
 import PartsGrid from '../components/PartsGrid';
+import { Translation } from 'react-i18next';
 
 class Search extends Component {
   static displayName = Search.name;
@@ -165,8 +166,8 @@ class Search extends Component {
     const { parts, loading, keyword, by, byValue } = this.state;
     return (
       <div>
-        <h1>Inventory</h1>
-        <Input placeholder='Search' icon='search' focus value={keyword} onChange={this.handleSearch} name='keyword' />
+        <h1><Translation>{t => <label>{t('inventory')}</label>}</Translation></h1>
+        <Translation>{t => <Input placeholder={t('search')} icon='search' focus value={keyword} onChange={this.handleSearch} name='keyword' />}</Translation>
         <div style={{ paddingTop: '10px', marginBottom: '10px' }}>
           {by && <Button primary size='mini' onClick={this.removeFilter}><Icon name='delete' />{by}: {byValue}</Button>}
         </div>
