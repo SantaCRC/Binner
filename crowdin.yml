@@ -1,0 +1,3 @@
+files:
+  - source: /Binner/Binner*/ClientApp/src
+    translation: /Binner/Binner*/ClientApp/public/locales/%two_letters_code%
